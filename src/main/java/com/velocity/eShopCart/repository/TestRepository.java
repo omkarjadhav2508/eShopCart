@@ -1,5 +1,5 @@
 package com.velocity.eShopCart.repository;
 
-public class Repository {
+public class TestRepository {
 
 }
