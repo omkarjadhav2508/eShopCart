@@ -2,12 +2,17 @@ package com.velocity.eShopCart.model;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedBy;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "subCategory")
@@ -24,24 +29,35 @@ public class SubCategory {
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "createddate")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createddate", nullable = false)
 	private Date createddate;
+	@PrePersist
+	private void onCreate() {
+		createddate = new Date();
+	}
 
+	@CreatedBy
 	@Column(name = "createdBy")
-	private String creayedBy;
+	private String createdBy;
 
 	@Column(name = "creategoryId")
 	private int categoryId;
-
+	
+	
 	public SubCategory(int subCategoryId, String subCategoryName, String description, Date createddate,
-			String creayedBy, int categoryId) {
+			String createdBy, int categoryId) {
 		super();
 		this.subCategoryId = subCategoryId;
 		this.subCategoryName = subCategoryName;
 		this.description = description;
 		this.createddate = createddate;
-		this.creayedBy = creayedBy;
+		this.createdBy = createdBy;
 		this.categoryId = categoryId;
+	}
+
+	public SubCategory() {
+		super();
 	}
 
 	public int getSubCategoryId() {
@@ -76,12 +92,12 @@ public class SubCategory {
 		this.createddate = createddate;
 	}
 
-	public String getCreayedBy() {
-		return creayedBy;
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
-	public void setCreayedBy(String creayedBy) {
-		this.creayedBy = creayedBy;
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public int getCategoryId() {
@@ -95,8 +111,12 @@ public class SubCategory {
 	@Override
 	public String toString() {
 		return "SubCategory [subCategoryId=" + subCategoryId + ", subCategoryName=" + subCategoryName + ", description="
-				+ description + ", createddate=" + createddate + ", creayedBy=" + creayedBy + ", categoryId="
+				+ description + ", createddate=" + createddate + ", createdBy=" + createdBy + ", categoryId="
 				+ categoryId + "]";
 	}
+
+	
+
+	
 
 }
