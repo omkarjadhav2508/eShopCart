@@ -78,10 +78,6 @@ public class Category {
 		this.image = image;
 	}
 
-	public Category() {
-		super();
-	}
-
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", categoryname=" + categoryname + ", description=" + description
